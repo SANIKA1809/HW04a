@@ -16,4 +16,4 @@ jobs:
 workflows:
     UNITTEST:
      jobs:
-         - build-and-test
+         -test
