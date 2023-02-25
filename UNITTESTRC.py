@@ -46,7 +46,7 @@ class TestMyCode(unittest.TestCase):
             mock_get.side_effect = [mock_response, mock_commits_response]
 
             # call the function to be tested
-            result = my_code.get_number_of_commits('https://api.github.com/users/SANIKA1809/repos')
+            result = Repocommit.get_number_of_commits('https://api.github.com/users/SANIKA1809/repos')
 
             # assert the results
             expected_result = {'repo1': 2, 'repo2': 2}
