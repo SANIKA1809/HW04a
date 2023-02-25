@@ -1,18 +1,20 @@
-version: 2.1
+ersion: 2.1
+orbs:
+  python: circleci/python@2.0.1
 jobs:
-  test:
-    docker:
-      - image: python:3.9
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: Run unit tests
-          command: python -m unittest discover -s tests -p "UNITTESTRC.py"
+  build-and-test:
+   docker:
+     - image: cimg/python:3.10.2
+   steps:
+     - checkout
+     - run:
+         command: |
+            pip install pytest
+            pip install requests
+            pytest --junitxml=test-results/junit.xml UNITTESTRC.py
+     - store_test_results:
+         path: test-results 
 workflows:
-  version: 2.1
-  test:
-    jobs:
-      - test
+    testing_triangles:
+     jobs:
+         - build-and-test
