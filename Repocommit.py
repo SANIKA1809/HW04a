@@ -8,16 +8,22 @@ Created on Fri Feb 24 19:21:52 2023
 import requests
 import json
 
-# make a request to the GitHub API
-response = requests.get('https://api.github.com/users/SANIKA1809/repos')
+def get_repo_commits(username):
+    # Get user's repositories
+    repo_url = f"https://api.github.com/users/{username}/repos"
+    response = requests.get(repo_url)
+    repos = json.loads(response.text)
 
-# parse the response data as JSON
-data = json.loads(response.text)
+    # Get number of commits for each repository
+    repo_commits = {}
+    for repo in repos:
+        repo_name = repo['name']
+        commits_url = f"https://api.github.com/repos/{username}/{repo_name}/commits"
+        response = requests.get(commits_url)
+        commits = json.loads(response.text)
+        repo_commits[repo_name] = len(commits)
 
-# iterate over each repository and get the number of commits
-for repo in data:
-    commits_url = repo['commits_url'].replace('{/sha}', '')
-    commits_response = requests.get(commits_url)
-    commits_data = json.loads(commits_response.text)
-    num_commits = len(commits_data)
-    print(repo['name'], num_commits)
+    return repo_commits
+username = "SANIKA1809"
+repo_commits = get_repo_commits(username)
+print(repo_commits)
