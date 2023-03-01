@@ -1,17 +1,9 @@
-import requests
-import json
-import unittest
+import Repocommit
 
-class TestGitHubAPI(unittest.TestCase):
-    
-    def test_number_of_commits(self):
-        response = requests.get('https://api.github.com/users/SANIKA1809/repos')
-        data = json.loads(response.text)
-
-        for repo in data:
-            commits_url = repo['commits_url'].replace('{/sha}', '')
-            commits_response = requests.get(commits_url)
-            commits_data = json.loads(commits_response.text)
-            num_commits = len(commits_data)
-            
-            self.assertTrue(num_commits >= 0)
+def test_get_repo_commits():
+    username = "SANIKA1809"
+    repo_commits = Repocommit.get_repo_commits(username)
+    assert isinstance(repo_commits, dict)
+    assert len(repo_commits) > 0
+    assert all(isinstance(key, str) for key in repo_commits.keys())
+    assert all(isinstance(value, int) for value in repo_commits.values())
