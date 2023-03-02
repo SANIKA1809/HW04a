@@ -18,6 +18,6 @@ jobs:
       - run:
           name: Run tests
           command: |
-            python -m unittest discover -s tests -p 'UNITTESTRC.py'
+            python -m unittest discover -s /path/to/tests -p 'UNITTESTRC.py'
       - store_test_results:
           path: test-results 
