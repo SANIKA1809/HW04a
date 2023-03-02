@@ -18,6 +18,10 @@ jobs:
       - run:
           name: Run tests
           command: |
-            python -m unittest discover -s /path/to/tests -p 'UNITTESTRC.py'
+            pytest --junitxml=test-results/junit.xml .py
       - store_test_results:
           path: test-results 
+workflows:
+ RepoCommitUsers:
+    jobs:
+      - build-and-test
