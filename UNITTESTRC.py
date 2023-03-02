@@ -1,7 +1,7 @@
 import Repocommit
 import unittest
 class RepoCommitUsers(unittest.TestCase):
-    def test_get_repo_commits():
+    def test_get_repo_commits(self):
         username = "SANIKA1809"
         repo_commits = Repocommit.get_repo_commits(username)
         assert isinstance(repo_commits, dict)
