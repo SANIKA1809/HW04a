@@ -18,4 +18,8 @@ jobs:
       - run:
           name: Run tests
           command: |
-            python -m unittest discover -s tests -p 'UNITTESTRC.py'     
+            python -m unittest discover -s tests -p 'UNITTESTRC.py'                
+workflows:
+  RepoCommitUsers:
+    jobs:
+      - build-and-test
