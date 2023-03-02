@@ -22,6 +22,5 @@ jobs:
       - store_test_results:
           path: test-results 
 workflows:
-  test_get_repo_commits:
     jobs:
       - build-and-test
