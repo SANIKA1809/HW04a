@@ -17,8 +17,8 @@ jobs:
             pip install requests
       - run:
           name: Run tests
-          command: |
-            python -m unittest discover -s tests -p 'UNITTESTRC.py'                
+          command: |  
+            pytest --junitxml=test-results/junit.xml UNITTESTRC.py
 workflows:
   RepoCommitUsers:
     jobs:
